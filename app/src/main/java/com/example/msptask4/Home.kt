@@ -59,6 +59,7 @@ class Home : AppCompatActivity() {
                var intent=Intent(baseContext,ItemRecyclerView::class.java)
                 intent.putExtra("mohamed",homes.get(position).phoneNumber)
                 startActivity(intent)
+
             }
 
 

@@ -1,9 +1,11 @@
 package com.example.msptask4
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.msptask4.Data.UserDatabase
 import com.example.msptask4.Data.UserRepo
 import com.example.msptask4.Recyclerview.Adapter
@@ -33,8 +35,12 @@ class ItemRecyclerView : AppCompatActivity() {
         TextPassword.text=repo.GetPassword(myPutExtra)
         TextId.text=repo.GetId(myPutExtra).toString()
         TextPhone.text=myPutExtra.toString()
+
         DeleteButton.setOnClickListener{
             repo.DeleteUser(repo.GetOneUser(TextId.text.toString().toInt()))
+            Toast.makeText(this, "Deleting", Toast.LENGTH_SHORT).show()
+            val intent= Intent(this,Home::class.java)
+            startActivity(intent)
         }
 
     }

@@ -66,14 +66,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         remeberme.setOnClickListener{
-            val email1=email.text.toString()
-            val password1=password.text.toString()
-            val phone1=phone.text.toString().toInt()
+            val emailPutShared=email.text.toString()
+            val passwordPutShared=password.text.toString()
+            val phonePutShared=phone.text.toString().toInt()
 
             editor.apply {
-                putString("email",email1)
-                putString("password",password1)
-                putInt("phone",phone1)
+                putString("email",emailPutShared)
+                putString("password",passwordPutShared)
+                putInt("phone",phonePutShared)
                 commit()
             }
 
@@ -81,12 +81,12 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        val email2=sharedPref.getString("email",null)
-        val password2=sharedPref.getString("password",null)
-        val phone2 =sharedPref.getInt("phone",0)
-        email.setText(email2)
-        password.setText(password2)
-        phone.setText(phone2.toString())
+        val emailSetShared=sharedPref.getString("email",null)
+        val passwordSetShared=sharedPref.getString("password",null)
+        val phoneSetShared =sharedPref.getInt("phone",0)
+        email.setText(emailSetShared)
+        password.setText(passwordSetShared)
+        phone.setText(phoneSetShared.toString())
 
         var MyPutText=getIntent().getIntExtra("mohamed",0)
         if (MyPutText==11){
@@ -96,9 +96,9 @@ class LoginActivity : AppCompatActivity() {
             phone.text=null
         }
         else{
-            if (email2==repo.GetUserName(phone2)){
-                if (password2==repo.GetPassword(phone2)){
-                    if (phone2==repo.GetPhoneNumber(phone2)){
+            if (emailSetShared==repo.GetUserName(phoneSetShared)){
+                if (passwordSetShared==repo.GetPassword(phoneSetShared)){
+                    if (phoneSetShared==repo.GetPhoneNumber(phoneSetShared)){
                         val intent=Intent(this,Home::class.java)
                         Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
