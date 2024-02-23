@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         UserDatabase.getDatabase(baseContext)
     }
     lateinit var repo:UserRepo
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -34,11 +35,12 @@ class LoginActivity : AppCompatActivity() {
         email=findViewById(R.id.edName)
         password=findViewById(R.id.edPassword)
         phone=findViewById(R.id.edPhone)
-        var sharedPref=getSharedPreferences("mohamed", MODE_PRIVATE)
-        val editor=sharedPref.edit()
+
+
         var homes=repo.GetAllUser()
         var adapter= Adapter(homes)
-
+        var sharedPref=getSharedPreferences("mohamed", MODE_PRIVATE)
+        val editor=sharedPref.edit()
 
 
 
@@ -56,10 +58,13 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, Home::class.java)
                         startActivity(intent)
 
+                    }else{
+                        Toast.makeText(this, "incorrect", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
+
         remeberme.setOnClickListener{
             val email1=email.text.toString()
             val password1=password.text.toString()
@@ -71,22 +76,52 @@ class LoginActivity : AppCompatActivity() {
                 putInt("phone",phone1)
                 commit()
             }
-            val email2=sharedPref.getString("email",null)
-            val password2=sharedPref.getString("password",null)
-            val phone2 =sharedPref.getInt("phone",0)
-            email.setText(email1)
-            password.setText(password2)
-            phone.setText(phone2.toString())
-        }
-        val myPutextra=getIntent().getIntExtra("mohamed",0)
-        if (myPutextra==11){
-            sharedPref=null
+
+
+
         }
 
-          if(sharedPref!=null){
-              val intent=Intent(this,Home::class.java)
-              startActivity(intent)
-          }
+        val email2=sharedPref.getString("email",null)
+        val password2=sharedPref.getString("password",null)
+        val phone2 =sharedPref.getInt("phone",0)
+        email.setText(email2)
+        password.setText(password2)
+        phone.setText(phone2.toString())
+
+        var MyPutText=getIntent().getIntExtra("mohamed",0)
+        if (MyPutText==11){
+            sharedPref=null
+            email.text=null
+            password.text=null
+            phone.text=null
+        }
+        else{
+            if (email2==repo.GetUserName(phone2)){
+                if (password2==repo.GetPassword(phone2)){
+                    if (phone2==repo.GetPhoneNumber(phone2)){
+                        val intent=Intent(this,Home::class.java)
+                        Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+
+                    }
+                    else{
+                        Toast.makeText(this, "incorrect", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+                else{
+                    Toast.makeText(this, "incorrect", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+            else{
+                Toast.makeText(this, "incorrect", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+
+
 
 
     }

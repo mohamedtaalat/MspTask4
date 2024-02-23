@@ -1,6 +1,7 @@
 package com.example.msptask4.Data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -19,4 +20,10 @@ interface Dao {
     fun GetUserName(phonenumber: Int):String
     @Query("select*from User")
     fun SelectAllUser():List<User>
+    @Query("select * from User where id =:id")
+    fun SelectOneUser(id:Int):User
+    @Delete
+    fun DeleteUser(user: User)
+
+
 }

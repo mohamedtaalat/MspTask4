@@ -20,5 +20,13 @@ fun addUser(user: User){
     fun GetAllUser():List<User>{
         return dao.SelectAllUser()
     }
+    fun GetOneUser(id:Int):User{
+        return dao.SelectOneUser(id)
+
+    }
+    fun DeleteUser(user: User){
+        return dao.DeleteUser(user)
+    }
+
 
 }

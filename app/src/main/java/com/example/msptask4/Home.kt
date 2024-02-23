@@ -15,6 +15,7 @@ class Home : AppCompatActivity() {
     lateinit var LogOutBtn:Button
     lateinit var AddBtn:Button
     lateinit var Recyclerview:RecyclerView
+    lateinit var DeleteButton:Button
 
     val database: UserDatabase by lazy{
         UserDatabase.getDatabase(baseContext)
@@ -27,6 +28,7 @@ class Home : AppCompatActivity() {
         LogOutBtn=findViewById(R.id.btLogout)
         AddBtn=findViewById(R.id.btAdd)
         Recyclerview=findViewById(R.id.rec)
+
 
 
         LogOutBtn.setOnClickListener{
@@ -50,6 +52,7 @@ class Home : AppCompatActivity() {
             startActivity(intent)
 
         }
+
         adapter.setOnItemClickListener(object :Adapter.onItemCliclListener{
             override fun onItemClick(position: Int) {
 
@@ -58,7 +61,9 @@ class Home : AppCompatActivity() {
                 startActivity(intent)
             }
 
+
         })
+
 
 
     }

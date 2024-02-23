@@ -2,6 +2,7 @@ package com.example.msptask4
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import com.example.msptask4.Data.UserDatabase
 import com.example.msptask4.Data.UserRepo
@@ -12,6 +13,7 @@ class ItemRecyclerView : AppCompatActivity() {
     lateinit var TextPassword:TextView
     lateinit var TextPhone:TextView
     lateinit var TextId:TextView
+    lateinit var DeleteButton:Button
     val database: UserDatabase by lazy{
         UserDatabase.getDatabase(baseContext)
     }
@@ -19,6 +21,8 @@ class ItemRecyclerView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_recycler_view)
+        DeleteButton=findViewById(R.id.DeleteButton)
+
        var myPutExtra=getIntent().getIntExtra("mohamed",0)
         var repo=UserRepo(database.dao())
         textEmail=findViewById(R.id.TextEmailItem)
@@ -29,6 +33,9 @@ class ItemRecyclerView : AppCompatActivity() {
         TextPassword.text=repo.GetPassword(myPutExtra)
         TextId.text=repo.GetId(myPutExtra).toString()
         TextPhone.text=myPutExtra.toString()
+        DeleteButton.setOnClickListener{
+            repo.DeleteUser(repo.GetOneUser(TextId.text.toString().toInt()))
+        }
 
     }
 }

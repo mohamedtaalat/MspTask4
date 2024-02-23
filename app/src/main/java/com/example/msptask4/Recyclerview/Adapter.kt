@@ -1,8 +1,10 @@
 package com.example.msptask4.Recyclerview
 
+import android.location.GnssAntennaInfo.Listener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.msptask4.Data.User
@@ -13,9 +15,13 @@ class Adapter(
 ):RecyclerView.Adapter<Adapter.ViewHolder>() {
     private lateinit var mListener: onItemCliclListener
 
+
+
     interface onItemCliclListener {
         fun onItemClick(position: Int)
+
     }
+
 
     fun setOnItemClickListener(listener: onItemCliclListener) {
         mListener = listener
@@ -28,13 +34,17 @@ class Adapter(
         var id: TextView = itemView.findViewById(R.id.tv3initem)
         var password: TextView = itemView.findViewById(R.id.tv4initem)
 
+
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
 
         }
+
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.iteminrec, parent, false)
