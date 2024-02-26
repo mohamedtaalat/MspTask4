@@ -5,16 +5,17 @@ fun addUser(user: User){
     dao.addUser(user)
 
 }
-    fun GetId(phonenumber:Int):Int{
+    fun GetId(phonenumber:Int):Int?{
        return dao.GetId(phonenumber)
     }
-    fun GetPassword(phonenumber:Int):String{
+    fun GetPassword(phonenumber:Int):String?{
         return dao.GetPassword(phonenumber)
+
     }
-    fun GetPhoneNumber(phonenumber: Int):Int{
+    fun GetPhoneNumber(phonenumber: Int):Int?{
         return dao.GetPhoneNumber(phonenumber)
     }
-    fun GetUserName(phonenumber: Int):String{
+    fun GetUserName(phonenumber: Int): String? {
         return dao.GetUserName(phonenumber)
     }
     fun GetAllUser():List<User>{

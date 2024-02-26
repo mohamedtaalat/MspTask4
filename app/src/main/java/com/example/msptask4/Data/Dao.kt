@@ -11,13 +11,13 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addUser(user: User)
     @Query("select password from user where PhoneNumber =:phonenumber")
-    fun GetPassword(phonenumber:Int):String
+    fun GetPassword(phonenumber:Int):String?
     @Query("select id from user where PhoneNumber =:phonenumber")
-    fun GetId(phonenumber:Int):Int
+    fun GetId(phonenumber:Int):Int?
     @Query("select phoneNumber from User where PhoneNumber =:phonenumber ")
-    fun GetPhoneNumber(phonenumber: Int):Int
+    fun GetPhoneNumber(phonenumber: Int):Int?
     @Query("Select email from User where PhoneNumber =:phonenumber")
-    fun GetUserName(phonenumber: Int):String
+    fun GetUserName(phonenumber: Int):String?
     @Query("select*from User")
     fun SelectAllUser():List<User>
     @Query("select * from User where id =:id")

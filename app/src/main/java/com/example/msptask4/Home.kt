@@ -3,8 +3,11 @@ package com.example.msptask4
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.msptask4.Data.UserDatabase
@@ -24,33 +27,24 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        inzlitaion()
+
         repo= UserRepo(database.dao())
-        LogOutBtn=findViewById(R.id.btLogout)
-        AddBtn=findViewById(R.id.btAdd)
-        Recyclerview=findViewById(R.id.rec)
-
-
-
-        LogOutBtn.setOnClickListener{
-            val intent=Intent(this,LoginActivity::class.java)
-            startActivity(intent)
-
-
-        }
         var homes=repo.GetAllUser()
         var adapter= Adapter(homes)
         Recyclerview.adapter=adapter
         Recyclerview.layoutManager=LinearLayoutManager(this)
+
+
+
+
         AddBtn.setOnClickListener{
-            var intent=Intent(this,SignupActivity::class.java)
-            intent.putExtra("mohamed",11)
-            startActivity(intent)
+           addButoon()
         }
         LogOutBtn.setOnClickListener{
-            var intent=Intent(this,LoginActivity::class.java)
-            intent.putExtra("mohamed",11)
-            startActivity(intent)
 
+        logout()
         }
 
         adapter.setOnItemClickListener(object :Adapter.onItemCliclListener{
@@ -59,7 +53,7 @@ class Home : AppCompatActivity() {
                var intent=Intent(baseContext,ItemRecyclerView::class.java)
                 intent.putExtra("mohamed",homes.get(position).phoneNumber)
                 startActivity(intent)
-
+                
             }
 
 
@@ -68,4 +62,36 @@ class Home : AppCompatActivity() {
 
 
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId==R.id.Share){
+            Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()
+        }
+        else if (item.itemId==R.id.Settings){
+            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+        }else if (item.itemId==R.id.Contact){
+            Toast.makeText(this, "Contact us", Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+    fun inzlitaion(){
+        LogOutBtn=findViewById(R.id.btLogout)
+        AddBtn=findViewById(R.id.btAdd)
+        Recyclerview=findViewById(R.id.rec)
+    }
+    fun logout(){
+        var intent=Intent(this,LoginActivity::class.java)
+        intent.putExtra("mohamed",11)
+        startActivity(intent)
+    }
+    fun addButoon(){
+        var intent=Intent(this,SignupActivity::class.java)
+        intent.putExtra("mohamed",11)
+        startActivity(intent)
+    }
+
+
 }
